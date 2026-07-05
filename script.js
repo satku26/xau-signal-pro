@@ -17,10 +17,6 @@ async function loadPrice() {
         const response = await fetch(url);
         const data = await response.json();
 
-document.getElementById("price").innerHTML =
-    JSON.stringify(data);
-return;
-
         if (!data.values) {
             document.getElementById("price").innerHTML = "Data gagal";
             return;
