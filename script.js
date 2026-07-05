@@ -37,8 +37,11 @@ async function loadPrice() {
         const ema50 = calculateEMA(prices, 50);
 
         document.getElementById("price").innerHTML = "$ " + price.toFixed(2);
-        document.getElementById("ema20").innerHTML = ema20.toFixed(2);
-        document.getElementById("ema50").innerHTML = ema50.toFixed(2);
+        document.getElementById("ema20").innerHTML =
+    ema20 ? ema20.toFixed(2) : "Data kurang";
+
+document.getElementById("ema50").innerHTML =
+    ema50 ? ema50.toFixed(2) : "Data kurang";
 
         let signal = "WAIT";
 
