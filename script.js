@@ -1,23 +1,24 @@
 async function loadPrice() {
-    try {
-        const url = `https://api.twelvedata.com/time_series?symbol=XAU/USD&interval=5min&outputsize=1&apikey=${API_KEY}`;
+    const url =
+        `https://api.twelvedata.com/time_series?symbol=XAU/USD&interval=5min&outputsize=60&apikey=${API_KEY}`;
 
+    try {
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log(data);
-
-        if (data.status === "error") {
-            document.getElementById("price").innerHTML = data.message;
+        if (!data.values) {
+            document.getElementById("price").innerHTML = "Gagal mengambil data";
             return;
         }
 
-        document.getElementById("price").innerHTML =
-            "$ " + data.values[0].close;
+        const price = data.values[0].close;
 
-    } catch (err) {
-        document.getElementById("price").innerHTML = err.message;
+        document.getElementById("price").innerHTML = price;
+
+    } catch (e) {
+        document.getElementById("price").innerHTML = "Error";
     }
 }
 
 loadPrice();
+setInterval(loadPrice,60000);
