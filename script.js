@@ -3,7 +3,7 @@ function calculateEMA(prices, period) {
 
     let ema = prices[0];
 
-    for (let i = 1; i < prices.length; i++) {
+    for (let i = 1; i < prices.length; i++
         ema = ((prices[i] - ema) * multiplier) + ema;
     }
 
