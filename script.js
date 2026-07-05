@@ -1,10 +1,15 @@
 function calculateEMA(prices, period) {
+    if (prices.length < period) {
+        return null;
+    }
+
     const multiplier = 2 / (period + 1);
 
-    let ema = prices[0];
+    let ema = prices.slice(0, period)
+        .reduce((a, b) => a + b, 0) / period;
 
-    for (let i = 1; i < prices.length; i++) {
-        ema = ((prices[i] - ema) * multiplier) + ema;
+    for (let i = period; i < prices.length; i++) {
+        ema = (prices[i] - ema) * multiplier + ema;
     }
 
     return ema;
